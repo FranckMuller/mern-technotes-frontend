@@ -1,0 +1,18 @@
+.header {
+  padding: 10px 20px;
+  background-color: #07244d;
+  nav {
+    ul {
+      display: flex;
+      justify-content: center;
+      li {
+        & + li {
+          margin-left: 10px;
+        }
+        a {
+          color: var(--HEADER-LINK);
+        }
+      }
+    }
+  }
+}

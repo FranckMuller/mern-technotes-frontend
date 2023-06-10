@@ -1,0 +1,9 @@
+.dash-layout {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  .dash-content {
+    flex-grow: 1;
+    flex-shrink: 1;
+  }
+}

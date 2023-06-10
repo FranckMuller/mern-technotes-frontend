@@ -1,0 +1,15 @@
+.dash-header {
+  margin: 10px 0 15px;
+  .title {
+    font-size: 12px;
+    a {
+      display: inline-flex;
+      align-items: center;
+      color: var(--PAGE-MAIN-LINK);
+    }
+    svg {
+      display: block;
+      font-size: 22px;
+    }
+  }
+}
