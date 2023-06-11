@@ -1,7 +1,11 @@
+import {useNavigate} from 'react-router-dom'
 import { useGetNotesQuery } from "./notesApi";
 import Note from "./Note";
 
+import styles from "./styles/notes-list.module.scss";
+
 const NotesList = () => {
+  const navigate = useNavigate()
   const {
     data: notes,
     isLoading,
@@ -9,6 +13,10 @@ const NotesList = () => {
     isError,
     error,
   } = useGetNotesQuery();
+  
+  const onNewButtonClick = () => {
+    navigate('/dash/notes/new')
+  }
 
   return (
     <>
@@ -17,10 +25,17 @@ const NotesList = () => {
       ) : isError ? (
         <p>{error?.data}</p>
       ) : isSuccess && notes?.ids.length ? (
-        notes.ids.map((noteId) => <Note key={noteId} noteId={noteId} />)
+        <div>
+          {notes.ids.map((noteId) => (
+            <Note key={noteId} noteId={noteId} />
+          ))}
+        </div>
       ) : (
         <p>not found</p>
       )}
+      <div className={styles["new-button-wrap"]}>
+        <button onClick={onNewButtonClick}>new</button>
+      </div>
     </>
   );
 };

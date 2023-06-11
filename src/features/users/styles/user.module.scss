@@ -1,0 +1,41 @@
+.user {
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  padding: 10px;
+  box-shadow: 0px 4px 8px 0px rgba(34, 60, 80, 0.2);
+  & + .user {
+    margin-top: 10px;
+  }
+  .username {
+    display: flex;
+    align-items: center;
+    text-transform: uppercase;
+    font-size: 14px;
+    margin-bottom: 5px;
+    svg {
+      margin-left: 5px;
+    }
+  }
+  .roles {
+    margin-bottom: 20px;
+  }
+  .buttons-group {
+    button {
+      padding: 5px 7px;
+      color: #ffffff;
+      border: none;
+      border-radius: 4px;
+      font-size: 12px;
+      text-transform: uppercase;
+      & + button {
+        margin-left: 7px;
+      }
+      &.edit-button {
+        background-color: var(--BLUE-COLOR);
+      }
+      &.delete-button {
+        background-color: var(--RED-COLOR);
+      }
+    }
+  }
+}

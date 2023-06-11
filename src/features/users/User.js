@@ -1,21 +1,50 @@
 import { useSelector } from "react-redux";
-import { selectUserById } from "./usersApi";
-import { Link } from "react-router-dom";
+import { selectUserById, useDeleteUserMutation } from "./usersApi";
+import { useNavigate } from "react-router-dom";
+import { BsFillRecordFill } from "react-icons/bs";
+
+import styles from "./styles/user.module.scss";
 
 const User = ({ userId }) => {
+  const navigate = useNavigate();
   const user = useSelector((state) => selectUserById(state, userId));
+  const [deleteUser, { isLoading, isSuccess, isError }] =
+    useDeleteUserMutation();
 
   if (!user) return null;
 
+  const onEditButtonClick = () => {
+    navigate(`/dash/users/${userId}`);
+  };
+
+  const onDeleteButtonClick = async () => {
+    await deleteUser({ id: userId });
+  };
+
   const userRolesString = user.roles?.toString().replaceAll(",", ", ");
-  // TO DO show status of user
-  const isActive = user.active;
 
   return (
-    <div>
-      <h3>{user.username}</h3>
-      <p>{userRolesString}</p>
-      <Link to={`/dash/user/${userId}`}>edit</Link>
+    <div className={styles["user"]}>
+      <h4 className={styles["username"]}>
+        {user.username}
+        <BsFillRecordFill color={user.active ? "green" : "red"} />
+      </h4>
+      {userRolesString && (
+        <p className={styles["roles"]}>
+          Roles: <i>{userRolesString}</i>
+        </p>
+      )}
+      <div className={styles["buttons-group"]}>
+        <button className={styles["edit-button"]} onClick={onEditButtonClick}>
+          edit
+        </button>
+        <button
+          className={styles["delete-button"]}
+          onClick={onDeleteButtonClick}
+        >
+          delete
+        </button>
+      </div>
     </div>
   );
 };

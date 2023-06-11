@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import { useUpdateUserMutation, useDeleteUserMutation } from "./usersApi";
 import { ROLES } from "config/roles";
 
+import styles from "./styles/edit-user-form.module.scss";
+
 const USER_REGEX = /^[A-z]{3,20}$/;
 const PWD_REGEX = /^[A-z0-9!@#$%]{4,12}$/;
 
@@ -42,7 +44,7 @@ const EditUserForm = ({ user }) => {
   }, [isSuccess, isDelSuccess, navigate]);
 
   const onChangeUsername = (e) => setUsername(e.target.value);
-  const onChangePassword = (e) => setPassword(e.farget.value);
+  const onChangePassword = (e) => setPassword(e.target.value);
   const onChangeActive = () => setActive((prev) => !prev);
 
   const onChangeRoles = (e) => {
@@ -68,9 +70,10 @@ const EditUserForm = ({ user }) => {
   let canSave;
   if (password) {
     canSave =
-      [validPassword, validUsername, roles.length].every(Boolean) && !isLoading;
+      [validPassword, validUsername, roles?.length].every(Boolean) &&
+      !isLoading;
   } else {
-    canSave = [validUsername, roles.length].every(Boolean) && !isLoading;
+    canSave = [validUsername, roles?.length].every(Boolean) && !isLoading;
   }
 
   const options = Object.values(ROLES).map((role) => (
@@ -83,20 +86,19 @@ const EditUserForm = ({ user }) => {
   const validUsernameClass = !validUsername ? "form-input--incomplete" : "";
   const validPasswordClass =
     password && !validPassword ? "form-input--incomplete" : "";
-  const validRolesClass = !Boolean(roles.length)
+  const validRolesClass = !Boolean(roles?.length)
     ? "form-input--incomplete"
     : "";
 
   const errContent = (error?.data?.message || delError?.data?.message) ?? "";
 
   return (
-    <>
+    <div className={styles["edit-user-form"]}>
+      <h3 className={styles["title"]}>Edit User</h3>
       <p className={"errClass"}>{error?.data?.message}</p>
 
       <form onSubmit={onSubmitForm}>
-        <h2>Edit User</h2>
-
-        <div>
+        <div className={styles["form-control"]}>
           <label htmlFor="username">Username: [3-20 letters]</label>
           <input
             className={validUsernameClass}
@@ -108,7 +110,7 @@ const EditUserForm = ({ user }) => {
           />
         </div>
 
-        <div>
+        <div className={styles["form-control"]}>
           <label htmlFor="password">Password: [4-12 chars incl. !@#$%]</label>
           <input
             className={validPasswordClass}
@@ -120,7 +122,7 @@ const EditUserForm = ({ user }) => {
           />
         </div>
 
-        <div>
+        <div className={styles["form-control"]}>
           <label htmlFor="roles">Assigned Roles:</label>
           <select
             className={validRolesClass}
@@ -135,7 +137,7 @@ const EditUserForm = ({ user }) => {
           </select>
         </div>
 
-        <div>
+        <div className={styles["form-control-select"]}>
           <label htmlFor="user-active">Active:</label>
           <input
             type="checkbox"
@@ -145,14 +147,25 @@ const EditUserForm = ({ user }) => {
             onChange={onChangeActive}
           />
         </div>
-
-        <button title="Save" disabled={!canSave}>
-          Save
-        </button>
-        
-        <button title="delete" type='button' disabled={canSave} onClick={onDeleteUser}>delete</button>
+        <div className={styles["buttons-group"]}>
+          <button
+            className={styles["save-button"]}
+            title="Save"
+            disabled={canSave}
+          >
+            Save
+          </button>
+          <button
+            className={styles["delete-button"]}
+            title="delete"
+            type="button"
+            onClick={onDeleteUser}
+          >
+            delete
+          </button>
+        </div>
       </form>
-    </>
+    </div>
   );
 };
 

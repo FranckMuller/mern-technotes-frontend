@@ -7,6 +7,9 @@
 }
 
 :root {
+  --GREEN-COLOR: #2bd32b;
+  --RED-COLOR: #e82916;
+  --BLUE-COLOR: #07244d;
   --HEADER-LINK: #fff;
   --PAGE-MAIN-LINK: #004a80;
   --BGCOLOR: #0f172a;
@@ -52,6 +55,14 @@ button,
 textarea,
 select {
   font: inherit;
+}
+
+input {
+  font-size: 14px;
+}
+
+button:disabled {
+  opacity: 0.6;
 }
 
 ul {

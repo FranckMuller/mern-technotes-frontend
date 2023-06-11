@@ -1,10 +1,12 @@
 import { useSelector } from "react-redux";
 import { selectNoteById } from "./notesApi";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
+import styles from "./styles/note.module.scss";
 
 const Note = ({ noteId }) => {
+  const navigate = useNavigate();
   const note = useSelector((state) => selectNoteById(state, noteId));
-  console.log(note);
 
   if (!note) return null;
 
@@ -17,13 +19,26 @@ const Note = ({ noteId }) => {
     month: "long",
   });
 
+  const onEditButtonClick = () => {
+    navigate(`/dash/notes/${noteId}`);
+  };
+
   return (
-    <div>
-      <h3>{note.title}</h3>
-      <p>{note.username}</p>
-      <p>created: {created}</p>
-      <p>updated: {updated}</p>
-      <Link to={`/note/${noteId}`}>edit</Link>
+    <div className={styles["note"]}>
+      <h3 className={styles["title"]}>{note.title}</h3>
+      <p className={styles["text"]}>{note.text}</p>
+      <div className={styles['date']}>
+        <p>
+          created by {note.username}: <i>{created}</i>
+        </p>
+        <p>updated: <i>{updated}</i></p>
+      </div>
+      <div className={styles["buttons-group"]}>
+        <button className={styles["edit-button"]} onClick={onEditButtonClick}>
+          edit
+        </button>
+        <button className={styles["delete-button"]}>delete</button>
+      </div>
     </div>
   );
 };

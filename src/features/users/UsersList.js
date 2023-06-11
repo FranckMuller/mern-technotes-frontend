@@ -21,7 +21,7 @@ const UsersList = () => {
       ) : isError ? (
         <p>{error?.data?.message}</p>
       ) : isSuccess && users?.ids?.length ? (
-        users.ids.map((userId) => <User key={userId} userId={userId} />)
+        <div>{users.ids.map((userId) => <User key={userId} userId={userId} />)}</div>
       ) : (
         <p>users not found</p>
       )}

@@ -1,0 +1,14 @@
+.new-button-wrap {
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+  button {
+    background-color: var(--GREEN-COLOR);
+    padding: 5px 7px;
+      color: #ffffff;
+      border: none;
+      border-radius: 4px;
+      font-size: 12px;
+      text-transform: uppercase;
+  }
+}
