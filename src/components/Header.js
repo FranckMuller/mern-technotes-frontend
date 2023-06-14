@@ -13,6 +13,9 @@ const Header = () => {
           <li>
             <Link to={"/dash/notes"}>notes</Link>
           </li>
+          <li>
+            <Link to={"/login"}>login</Link>
+          </li>
         </ul>
       </nav>
     </header>

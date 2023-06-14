@@ -1,4 +1,4 @@
-.edit-user-form {
+.edit-note-form {
   .title {
     text-align: center;
     margin-bottom: 30px;
@@ -9,23 +9,6 @@
     padding: 20px 10px;
     border-radius: 5px;
     margin-bottom: 20px;
-    .form-control-select {
-      display: flex;
-      align-items: center;
-      margin-bottom: 30px;
-      margin-top: 15px;
-      label {
-        font-weight: 600;
-        font-size: 14px;
-        margin-right: 10px;
-      }
-      select {
-        option {
-          
-        font-size: 14px;
-        }
-      }
-    }
     .form-control {
       display: flex;
       flex-direction: column;
@@ -37,8 +20,7 @@
         font-size: 14px;
         margin-bottom: 10px;
       }
-      input,
-      select {
+      input{
         border: none;
         border-bottom: 1px solid #ddd;
         outline: none;
@@ -48,6 +30,7 @@
     .buttons-group {
       display: flex;
       justify-content: end;
+      margin-top: 30px;
       button {
         padding: 5px 7px;
         color: #ffffff;

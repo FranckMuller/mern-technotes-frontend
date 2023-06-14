@@ -40,7 +40,7 @@ const NewNoteForm = () => {
       <h3 className={styles["title"]}>New note</h3>
       <form onSubmit={onSubmitForm}>
         <div className={styles["form-control"]}>
-          <label className={styles["input-label"]} htmlFor="title">
+          <label htmlFor="title">
             Title:
           </label>
           <input
@@ -54,7 +54,7 @@ const NewNoteForm = () => {
         </div>
 
         <div className={styles["form-control"]}>
-          <label className={styles["input-label"]} htmlFor="text">
+          <label htmlFor="text">
             Text:
           </label>
           <input
