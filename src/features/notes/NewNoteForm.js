@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAddNewNoteMutation } from "./notesApi";
+import { useAddNewNoteMutation } from "./notes-api";
 
 import styles from "./styles/new-note-form.module.scss";
 

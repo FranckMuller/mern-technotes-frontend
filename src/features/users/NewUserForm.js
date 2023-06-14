@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAddNewUserMutation } from "./usersApi";
+import { useAddNewUserMutation } from "./users-api";
 import { ROLES } from "config/roles";
 
 const USER_REGEX = /^[A-z]{3,20}$/;

@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { selectNoteById } from "./notesApi";
-import { selectAllUsers } from "../users/usersApi";
+import { selectNoteById } from "./notes-api";
+import { selectAllUsers } from "../users/users-api";
 import EditNoteForm from "./EditNoteForm";
 
 const EditNote = () => {

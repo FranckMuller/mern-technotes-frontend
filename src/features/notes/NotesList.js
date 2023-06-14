@@ -1,11 +1,11 @@
-import {useNavigate} from 'react-router-dom'
-import { useGetNotesQuery } from "./notesApi";
+import { useNavigate } from "react-router-dom";
+import { useGetNotesQuery } from "./notes-api";
 import Note from "./Note";
 
 import styles from "./styles/notes-list.module.scss";
 
 const NotesList = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const {
     data: notes,
     isLoading,
@@ -13,17 +13,17 @@ const NotesList = () => {
     isError,
     error,
   } = useGetNotesQuery();
-  
+
   const onNewButtonClick = () => {
-    navigate('/dash/notes/new')
-  }
+    navigate("/dash/notes/new");
+  };
 
   return (
     <>
       {isLoading ? (
         <p>loading...</p>
       ) : isError ? (
-        <p>{error?.data}</p>
+        <p>{error?.data?.message}</p>
       ) : isSuccess && notes?.ids.length ? (
         <div>
           {notes.ids.map((noteId) => (

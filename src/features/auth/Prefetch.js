@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import { store } from "app/store";
-import { notesApiSlice } from "features/notes/notesApi";
-import { usersApiSlice } from "features/users/usersApi";
+import { notesApiSlice } from "features/notes/notes-api";
+import { usersApiSlice } from "features/users/users-api";
 
 const Prefetch = () => {
   useEffect(() => {

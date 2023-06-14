@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { selectNoteById } from "./notesApi";
+import { selectNoteById } from "./notes-api";
 import { useNavigate } from "react-router-dom";
 
 import styles from "./styles/note.module.scss";

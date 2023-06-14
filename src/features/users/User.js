@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { selectUserById, useDeleteUserMutation } from "./usersApi";
+import { selectUserById, useDeleteUserMutation } from "./users-api";
 import { useNavigate } from "react-router-dom";
 import { BsFillRecordFill } from "react-icons/bs";
 

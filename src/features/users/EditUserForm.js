@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { useUpdateUserMutation, useDeleteUserMutation } from "./usersApi";
+import { useUpdateUserMutation, useDeleteUserMutation } from "./users-api";
 import { ROLES } from "config/roles";
 
 import styles from "./styles/edit-user-form.module.scss";
