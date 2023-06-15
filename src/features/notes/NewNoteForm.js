@@ -17,7 +17,7 @@ const NewNoteForm = () => {
   const onSubmitForm = async (e) => {
     e.preventDefault();
     if (!title || !text) return;
-    await addNewNote({ userid: 1, title, text });
+    await addNewNote({ title, text });
   };
 
   useEffect(() => {
@@ -40,9 +40,7 @@ const NewNoteForm = () => {
       <h3 className={styles["title"]}>New note</h3>
       <form onSubmit={onSubmitForm}>
         <div className={styles["form-control"]}>
-          <label htmlFor="title">
-            Title:
-          </label>
+          <label htmlFor="title">Title:</label>
           <input
             className={validTitleClass}
             id="title"
@@ -54,9 +52,7 @@ const NewNoteForm = () => {
         </div>
 
         <div className={styles["form-control"]}>
-          <label htmlFor="text">
-            Text:
-          </label>
+          <label htmlFor="text">Text:</label>
           <input
             className={validTextClass}
             id="text"
@@ -66,8 +62,8 @@ const NewNoteForm = () => {
             onChange={onChangeText}
           />
         </div>
-        <div className={styles['save-button-wrap']}>
-        <button disabled={!canSave}>save</button>
+        <div className={styles["save-button-wrap"]}>
+          <button disabled={!canSave}>save</button>
         </div>
       </form>
     </div>

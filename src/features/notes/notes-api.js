@@ -10,7 +10,6 @@ const initialState = notesAdapter.getInitialState();
 
 export const notesApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => {
-    console.log(builder);
     return {
       getNotes: builder.query({
         query: () => "/notes",
@@ -25,26 +24,33 @@ export const notesApiSlice = apiSlice.injectEndpoints({
           });
           return notesAdapter.setAll(initialState, loadedNotes);
         },
-        providedTags: (result, err, arg) => {
+        providesTags: (result, err, arg) => {
+          console.log(result);
           if (result?.ids) {
             return [
-              { type: "Note", id: "List" },
-              ...result.ids.map((id) => ({ type: "Note", id })),
+              { type: "Notes", id: "LIST" },
+              ...result.ids.map((id) => ({ type: "Notes", id })),
             ];
           } else {
-            return [{ type: "Note", id: "List" }];
+            return [{ type: "Notes", id: "LIST" }];
           }
         },
       }),
+
       addNewNote: builder.mutation({
-        query: (data) => ({
-          url: "/notes",
-          method: "POST",
-          body: {
-            ...data,
-          },
-        }),
+        query: (data) => {
+          return {
+            url: "/notes",
+            method: "POST",
+            body: {
+              userid: "646c8e8d572aa4332e38aaf0",
+              ...data,
+            },
+          };
+        },
+        invalidatesTags: [{ type: "Notes", id: "LIST" }],
       }),
+
       updateNote: builder.mutation({
         query: (data) => ({
           url: "notes",
@@ -53,6 +59,15 @@ export const notesApiSlice = apiSlice.injectEndpoints({
             ...data,
           },
         }),
+      }),
+
+      deleteNote: builder.mutation({
+        query: (id) => ({
+          url: "/notes",
+          method: "DELETE",
+          body: { id },
+        }),
+        invalidatesTags: [{ type: "Notes", id: "LIST" }],
       }),
     };
   },
@@ -73,4 +88,9 @@ export const {
   (state) => selectNotesData(state) ?? initialState
 );
 
-export const { useGetNotesQuery, useAddNewNoteMutation, useUpdateNoteMutation } = notesApiSlice;
+export const {
+  useGetNotesQuery,
+  useAddNewNoteMutation,
+  useUpdateNoteMutation,
+  useDeleteNoteMutation,
+} = notesApiSlice;
