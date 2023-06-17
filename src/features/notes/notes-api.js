@@ -25,7 +25,6 @@ export const notesApiSlice = apiSlice.injectEndpoints({
           return notesAdapter.setAll(initialState, loadedNotes);
         },
         providesTags: (result, err, arg) => {
-          console.log(result);
           if (result?.ids) {
             return [
               { type: "Notes", id: "LIST" },
@@ -43,7 +42,6 @@ export const notesApiSlice = apiSlice.injectEndpoints({
             url: "/notes",
             method: "POST",
             body: {
-              userid: "646c8e8d572aa4332e38aaf0",
               ...data,
             },
           };

@@ -33,8 +33,8 @@ const Login = () => {
   const onSubmitForm = async (e) => {
     e.preventDefault();
     try {
-      const { accessToken } = await login({ username, password }).unwrap();
-      dispatch(setCredentials({ accessToken }));
+      const authData = await login({ username, password }).unwrap();
+      dispatch(setCredentials({ ...authData }));
       setUsername("");
       setPassword("");
       navigate("/dash");

@@ -1,13 +1,17 @@
 import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useAddNewNoteMutation } from "./notes-api";
+import { selectAuthedUserid } from "features/auth/auth-slice";
 
 import styles from "./styles/new-note-form.module.scss";
 
 const NewNoteForm = () => {
   const navigate = useNavigate();
+  const authedUserid = useSelector(selectAuthedUserid);
   const [addNewNote, { isLoading, isSuccess, isError, error }] =
     useAddNewNoteMutation();
+  console.log(authedUserid);
 
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
@@ -17,7 +21,7 @@ const NewNoteForm = () => {
   const onSubmitForm = async (e) => {
     e.preventDefault();
     if (!title || !text) return;
-    await addNewNote({ title, text });
+    await addNewNote({userid: authedUserid, title, text });
   };
 
   useEffect(() => {
