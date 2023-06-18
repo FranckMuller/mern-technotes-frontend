@@ -16,7 +16,7 @@ export const authApi = apiSlice.injectEndpoints({
         arg,
         { dispatch, getState, queryFulfilled, requestId, extra, getCacheEntry }
       ) => {
-        console.log("METHOD: [onQueryStarted]")
+        console.log("METHOD: [onQueryStarted]");
       },
 
       async onCacheEntryAdded(
@@ -33,6 +33,18 @@ export const authApi = apiSlice.injectEndpoints({
       ) {
         console.log("METHOD: [onCacheEntryAdded]");
       },
+    }),
+
+    registration: builder.mutation({
+      query: (userData) => {
+        return {
+          url: "/auth/registration",
+          method: "POST",
+          body: {
+            ...userData,
+          },
+        };
+      }
     }),
 
     logOut: builder.mutation({
@@ -59,5 +71,9 @@ export const authApi = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useLoginMutation, useLogOutMutation, useRefreshMutation } =
-  authApi;
+export const {
+  useLoginMutation,
+  useLogOutMutation,
+  useRefreshMutation,
+  useRegistrationMutation,
+} = authApi;

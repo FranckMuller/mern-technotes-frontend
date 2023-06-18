@@ -11,13 +11,15 @@ import UsersList from "./features/users/UsersList";
 import EditUser from "./features/users/EditUser";
 import NewUserForm from "./features/users/NewUserForm";
 import Prefetch from "./features/auth/Prefetch";
+import RegistrationForm from 'features/auth/RegistrationForm'
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={<Public />} />
-        <Route path="login" element={<Login />} />
+        <Route path="sign-in" element={<Login />} />
+        <Route path="sign-up" element={<RegistrationForm/>} />
 
         <Route element={<Prefetch />}>
           <Route path="dash" element={<DashLayout />}>

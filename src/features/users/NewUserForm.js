@@ -3,8 +3,9 @@ import { useNavigate } from "react-router-dom";
 import { useAddNewUserMutation } from "./users-api";
 import { ROLES } from "config/roles";
 
-const USER_REGEX = /^[A-z]{3,20}$/;
-const PWD_REGEX = /^[A-z0-9!@#$%]{4,12}$/;
+const USER_REGEX = /^[A-z0-9]{3,20}$/;
+ const PWD_REGEX =
+  /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
 
 const NewUserForm = () => {
   const [addNewUser, { isLoading, isSuccess, isError, error }] =
