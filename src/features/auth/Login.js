@@ -1,9 +1,10 @@
 import { useRef, useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
-
 import { useDispatch } from "react-redux";
+
 import { setCredentials } from "./auth-slice";
 import { useLoginMutation } from "./auth-api";
+import { usePersist } from "hooks/use-persist";
 
 import styles from "./styles/login.module.scss";
 
@@ -11,12 +12,13 @@ const Login = () => {
   const userRef = useRef();
   const errRef = useRef();
 
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errMsg, setErrMsg] = useState("");
-
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const [persist, setPersist] = usePersist();
 
   const [login, { isLoading }] = useLoginMutation();
 
@@ -30,6 +32,7 @@ const Login = () => {
 
   const onChangeUsername = (e) => setUsername(e.target.value);
   const onChangePassword = (e) => setPassword(e.target.value);
+  const onChangePersist = () => setPersist((prev) => !prev);
   const onSubmitForm = async (e) => {
     e.preventDefault();
     try {
@@ -53,14 +56,13 @@ const Login = () => {
   };
 
   const canLogin = username && password;
-
   const errClass = errMsg ? "errmsg" : "offscreen";
 
   if (isLoading) return <p>Loading...</p>;
 
   return (
     <section className={styles["login"]}>
-      <h3>Login</h3>
+      <h3 className={styles["title"]}>Login</h3>
       <p ref={errRef} className={styles[errClass]} aria-live="assertive">
         {errMsg}
       </p>
@@ -90,8 +92,22 @@ const Login = () => {
             required
           />
         </div>
-        <div className={styles["signin-button-wrap"]}>
-          <button disabled={!canLogin}>sign in</button>
+        <div
+          className={`${styles["form-control"]} ${styles["form-select-control"]}`}
+        >
+          <label htmlFor="persist">Trust this device?</label>
+          <input
+            name="persist"
+            id="persist"
+            type="checkbox"
+            checked={persist}
+            onChange={onChangePersist}
+          />
+        </div>
+        <div className={styles["button-wrapper"]}>
+          <button className={styles["signin-button"]} disabled={!canLogin}>
+            sign in
+          </button>
         </div>
       </form>
     </section>

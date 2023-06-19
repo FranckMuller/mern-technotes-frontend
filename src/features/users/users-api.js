@@ -17,6 +17,7 @@ export const usersApiSlice = apiSlice.injectEndpoints({
           user.id = user._id;
           return user;
         });
+          console.log(1111111, loadedUsers);
         return usersAdapter.setAll(initialState, loadedUsers);
       },
       providedTags: (result, err, arg) => {
@@ -45,7 +46,7 @@ export const usersApiSlice = apiSlice.injectEndpoints({
         },
       ],
     }),
-    
+
     updateUser: builder.mutation({
       query: (data) => ({
         url: "/users",
@@ -56,7 +57,7 @@ export const usersApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: (result, err, arg) => [{ type: "User", id: arg.id }],
     }),
-    
+
     deleteUser: builder.mutation({
       query: ({ id }) => ({
         url: "/users",

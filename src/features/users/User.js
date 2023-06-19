@@ -10,6 +10,8 @@ const User = ({ userId }) => {
   const user = useSelector((state) => selectUserById(state, userId));
   const [deleteUser, { isLoading, isSuccess, isError }] =
     useDeleteUserMutation();
+    
+  if (!user) return null;
 
   const onEditButtonClick = () => {
     navigate(`/dash/users/${userId}`);
@@ -27,9 +29,9 @@ const User = ({ userId }) => {
         {user.username}
         <BsFillRecordFill color={user.active ? "green" : "red"} />
       </h4>
-      
+
       <h4>{user.id}</h4>
-      
+
       {userRolesString && (
         <p className={styles["roles"]}>
           Roles: <i>{userRolesString}</i>

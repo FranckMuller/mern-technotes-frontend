@@ -57,8 +57,8 @@ const RegistrationForm = () => {
     try {
       const userData = await registration({ ...formData }).unwrap();
       dispatch(setCredentials(userData));
-      setFormData(initialFormData)
-      navigate('/dash')
+      setFormData(initialFormData);
+      navigate("/dash");
     } catch (err) {
       console.log(err);
     }
@@ -74,7 +74,7 @@ const RegistrationForm = () => {
 
   return (
     <div className={styles["registration-form"]}>
-      <h3 className={styles["title"]}>Sign Up</h3>
+      <h3 className={styles["title"]}>Sign up to technotes</h3>
 
       <form onSubmit={onSubmitForm}>
         <div className={styles["form-control"]}>
@@ -128,13 +128,13 @@ const RegistrationForm = () => {
             className={styles["registration-button"]}
             disabled={!canSubmit}
           >
-            Registration
+            Sign up
           </button>
           <p className={styles[errClass]}>{error?.data?.message}</p>
         </div>
 
         <p className={styles["bottom-text"]}>
-          Already have an account ? <Link to="/sign-in">sign in</Link>
+          Already have an account ? <Link to="/signin">sign in</Link>
         </p>
       </form>
     </div>
