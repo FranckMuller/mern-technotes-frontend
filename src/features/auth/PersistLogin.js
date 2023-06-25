@@ -13,7 +13,7 @@ const PersistLogin = () => {
 
   const [trueSuccess, setTrueSuccess] = useState(false);
 
-  const [refresh, { isUnitialized, isLoading, isSuccess, isError, error }] =
+  const [refresh, { isUninitialized, isLoading, isSuccess, isError, error }] =
     useRefreshMutation();
 
   useEffect(() => {
@@ -43,12 +43,12 @@ const PersistLogin = () => {
         <p>loading...</p>
       ) : isError ? (
         <p>
-          {error.data?.message}
-          <Link to="/signin">please login again</Link>
+          <span>{error.data?.message}</span>
+          <Link to="/signin"> please login again</Link>
         </p>
       ) : isSuccess && trueSuccess ? (
         <Outlet />
-      ) : accessToken && isUnitialized ? (
+      ) : accessToken && isUninitialized ? (
         <Outlet />
       ) : null}
     </>

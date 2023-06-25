@@ -9,7 +9,6 @@ import { usePersist } from "hooks/use-persist";
 import styles from "./styles/login.module.scss";
 
 const Login = () => {
-  const userRef = useRef();
   const errRef = useRef();
 
   const navigate = useNavigate();
@@ -20,11 +19,7 @@ const Login = () => {
   const [errMsg, setErrMsg] = useState("");
   const [persist, setPersist] = usePersist();
 
-  const [login, { isLoading }] = useLoginMutation();
-
-  useEffect(() => {
-    userRef.current.focus();
-  }, []);
+  const [login] = useLoginMutation();
 
   useEffect(() => {
     if (errMsg) setErrMsg("");
@@ -58,22 +53,19 @@ const Login = () => {
   const canLogin = username && password;
   const errClass = errMsg ? "errmsg" : "offscreen";
 
-  if (isLoading) return <p>Loading...</p>;
-
   return (
     <section className={styles["login"]}>
-      <h3 className={styles["title"]}>Login</h3>
+      <h3 className={styles["title"]}>Login to technotes</h3>
       <p ref={errRef} className={styles[errClass]} aria-live="assertive">
         {errMsg}
       </p>
       <form onSubmit={onSubmitForm}>
         <div className={styles["form-control"]}>
-          <label htmlFor="username">Username</label>
+          <label htmlFor="username">Username:</label>
           <input
             name="username"
             id="username"
             autoComplete="off"
-            ref={userRef}
             value={username}
             onChange={onChangeUsername}
             required
@@ -81,7 +73,7 @@ const Login = () => {
         </div>
 
         <div className={styles["form-control"]}>
-          <label htmlFor="password">Password</label>
+          <label htmlFor="password">Password:</label>
           <input
             name="password"
             type="password"
@@ -92,6 +84,7 @@ const Login = () => {
             required
           />
         </div>
+
         <div
           className={`${styles["form-control"]} ${styles["form-select-control"]}`}
         >
@@ -109,6 +102,10 @@ const Login = () => {
             sign in
           </button>
         </div>
+
+        <p className={styles["bottom-text"]}>
+          New to Technotes ? <Link to="/signup">Create an account</Link>
+        </p>
       </form>
     </section>
   );

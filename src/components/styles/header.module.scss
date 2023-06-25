@@ -4,6 +4,7 @@
   nav {
     display: flex;
     align-items: center;
+    height: 30px;
     ul {
       display: flex;
       justify-content: center;
@@ -19,7 +20,8 @@
       }
     }
 
-    .sign-up-link {
+    .sign-up-link,
+    .signout-button {
       padding: 4px 8px;
       border-radius: 4px;
       color: var(--COLOR);
@@ -28,6 +30,7 @@
       right: 10px;
       font-size: 13px;
       font-weight: 600;
+      border: none;
     }
   }
 }

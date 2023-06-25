@@ -21,27 +21,26 @@ function App() {
         <Route index element={<Public />} />
         <Route path="signin" element={<Login />} />
         <Route path="signup" element={<Registration />} />
+<Route element={<PersistLogin/>}>
+        <Route element={<Prefetch />}>
+          <Route path="dash" element={<DashLayout />}>
+            <Route index element={<Welcome />} />
 
-        <Route element={<PersistLogin />}>
-          <Route element={<Prefetch />}>
-            <Route path="dash" element={<DashLayout />}>
-              <Route index element={<Welcome />} />
+            <Route path="users">
+              <Route index element={<UsersList />} />
+              <Route path=":id" element={<EditUser />} />
+              <Route path="new" element={<NewUserForm />} />
+            </Route>
 
-              <Route path="users">
-                <Route index element={<UsersList />} />
-                <Route path=":id" element={<EditUser />} />
-                <Route path="new" element={<NewUserForm />} />
-              </Route>
-
-              <Route path="notes">
-                <Route index element={<NotesList />} />
-                <Route path=":id" element={<EditNote />} />
-                <Route path="new" element={<NewNote />} />
-              </Route>
+            <Route path="notes">
+              <Route index element={<NotesList />} />
+              <Route path=":id" element={<EditNote />} />
+              <Route path="new" element={<NewNote />} />
             </Route>
           </Route>
+</Route>
+          {/* End Dash */}
         </Route>
-        {/* End Dash */}
       </Route>
     </Routes>
   );

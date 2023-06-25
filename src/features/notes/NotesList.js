@@ -12,7 +12,7 @@ const NotesList = () => {
     isSuccess,
     isError,
     error,
-  } = useGetNotesQuery('NotesList',{
+  } = useGetNotesQuery("NotesList", {
     pollingInterval: 60000,
     refetchOnFocus: true,
     refetchOnMountOrArgChange: true,
@@ -37,9 +37,6 @@ const NotesList = () => {
       ) : (
         <p>not found</p>
       )}
-      <div className={styles["new-button-wrap"]}>
-        <button onClick={onNewButtonClick}>new</button>
-      </div>
     </>
   );
 };

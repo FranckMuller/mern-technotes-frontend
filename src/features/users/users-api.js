@@ -17,7 +17,6 @@ export const usersApiSlice = apiSlice.injectEndpoints({
           user.id = user._id;
           return user;
         });
-          console.log(1111111, loadedUsers);
         return usersAdapter.setAll(initialState, loadedUsers);
       },
       providedTags: (result, err, arg) => {
