@@ -8,7 +8,7 @@ import styles from "./styles/user.module.scss";
 const User = ({ userId }) => {
   const navigate = useNavigate();
   const user = useSelector((state) => selectUserById(state, userId));
-  const [deleteUser, { isLoading, isSuccess, isError }] =
+  const [deleteUser] =
     useDeleteUserMutation();
     
   if (!user) return null;
