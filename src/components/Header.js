@@ -23,15 +23,15 @@ const Header = () => {
 
   const path = location.pathname;
 
-  let button = 
-      <Link to="/signup" className={styles["sign-up-link"]}>
-        Sign up
-      </Link>
-    
+  let button = (
+    <Link to="/signup" className={styles["signin-link"]}>
+      Sign up
+    </Link>
+  );
 
   if (!authedUser && location.pathname === "/signup")
     button = (
-      <Link to="/signin" className={styles["sign-up-link"]}>
+      <Link to="/signin" className={styles["signup-link"]}>
         Sign in
       </Link>
     );
@@ -46,21 +46,7 @@ const Header = () => {
 
   return (
     <header className={styles["header"]}>
-      <nav>
-        <ul>
-          {authedUser && (
-            <>
-              <li>
-                <Link to="/dash/users">users</Link>
-              </li>
-              <li>
-                <Link to="/dash/notes">notes</Link>
-              </li>
-            </>
-          )}
-        </ul>
-        {button}
-      </nav>
+      <nav>{button}</nav>
     </header>
   );
 };

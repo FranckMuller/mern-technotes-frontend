@@ -3,24 +3,11 @@
   background-color: var(--BLUE-COLOR);
   nav {
     display: flex;
-    align-items: center;
+    justify-content: end;
     height: 30px;
-    ul {
-      display: flex;
-      justify-content: center;
-      flex-grow: 1;
-      flex-shrink: 1;
-      li {
-        & + li {
-          margin-left: 10px;
-        }
-        a {
-          color: var(--HEADER-LINK);
-        }
-      }
-    }
 
-    .sign-up-link,
+    .signup-link,
+    .signin-link,
     .signout-button {
       padding: 4px 8px;
       border-radius: 4px;
