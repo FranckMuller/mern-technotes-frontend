@@ -8,9 +8,8 @@ import styles from "./styles/user.module.scss";
 const User = ({ userId }) => {
   const navigate = useNavigate();
   const user = useSelector((state) => selectUserById(state, userId));
-  const [deleteUser] =
-    useDeleteUserMutation();
-    
+  const [deleteUser] = useDeleteUserMutation();
+
   if (!user) return null;
 
   const onEditButtonClick = () => {

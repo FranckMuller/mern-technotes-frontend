@@ -4,7 +4,7 @@ import { useAddNewUserMutation } from "./users-api";
 import { ROLES } from "config/roles";
 
 const USER_REGEX = /^[A-z0-9]{3,20}$/;
- const PWD_REGEX =
+const PWD_REGEX =
   /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
 
 const NewUserForm = () => {
@@ -109,7 +109,9 @@ const NewUserForm = () => {
             size="3"
             value={roles}
             onChange={onChangeRoles}
-          >{options}</select>
+          >
+            {options}
+          </select>
         </div>
 
         <button title="Save" disabled={!canSave}>
