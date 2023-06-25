@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { useAddNewUserMutation } from "./users-api";
 import { ROLES } from "config/roles";
 
+import styles from "./styles/new-user.module.scss";
+
 const USER_REGEX = /^[A-z0-9]{3,20}$/;
 const PWD_REGEX =
   /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
@@ -69,13 +71,11 @@ const NewUserForm = () => {
   const validRolesClass = !Boolean(roles.length) ? "incomplete-input" : "";
 
   return (
-    <>
-      <p className={"errClass"}>{error?.data?.message}</p>
-
+    <div className={styles["new-user"]}>
       <form onSubmit={onSubmitForm}>
-        <h2>New User</h2>
+        <h2 className={styles["title"]}>New User</h2>
 
-        <div>
+        <div className={styles["form-control"]}>
           <label htmlFor="username">Username: [3-20 letters]</label>
           <input
             className={validUsernameClass}
@@ -87,7 +87,7 @@ const NewUserForm = () => {
           />
         </div>
 
-        <div>
+        <div className={styles["form-control"]}>
           <label htmlFor="password">Password: [4-12 chars incl. !@#$%]</label>
           <input
             className={validPasswordClass}
@@ -99,7 +99,7 @@ const NewUserForm = () => {
           />
         </div>
 
-        <div>
+        <div className={styles["form-control"]}>
           <label htmlFor="roles">Assigned Roles:</label>
           <select
             className={validRolesClass}
@@ -114,11 +114,18 @@ const NewUserForm = () => {
           </select>
         </div>
 
-        <button title="Save" disabled={!canSave}>
-          Save
-        </button>
+        <div className={styles["button-wrapper"]}>
+          <button
+            className={styles["save-button"]}
+            title="Save"
+            disabled={!canSave}
+          >
+            Save
+          </button>
+          <p className={"errClass"}>{error?.data?.message}</p>
+        </div>
       </form>
-    </>
+    </div>
   );
 };
 

@@ -9,7 +9,7 @@ import EditNote from "./features/notes/EditNote";
 import NewNote from "./features/notes/NewNote";
 import UsersList from "./features/users/UsersList";
 import EditUser from "./features/users/EditUser";
-import NewUserForm from "./features/users/NewUserForm";
+import NewUser from "./features/users/NewUser";
 import Prefetch from "./features/auth/Prefetch";
 import Registration from "features/auth/Registration";
 import PersistLogin from "features/auth/PersistLogin";
@@ -29,7 +29,7 @@ function App() {
             <Route path="users">
               <Route index element={<UsersList />} />
               <Route path=":id" element={<EditUser />} />
-              <Route path="new" element={<NewUserForm />} />
+              <Route path="new" element={<NewUser />} />
             </Route>
 
             <Route path="notes">

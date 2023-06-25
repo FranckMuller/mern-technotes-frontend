@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { useRegistrationMutation } from "./auth-api";
 import { setCredentials } from "./auth-slice";
 
-import styles from "./styles/registration-form.module.scss";
+import styles from "./styles/registration.module.scss";
 
 const initialFormData = {
   username: "",
