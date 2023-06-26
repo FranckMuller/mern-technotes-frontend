@@ -24,7 +24,7 @@ const NotesList = () => {
     navigate("/dash/notes/new");
   };
 
-  let filteredIds = null
+  let filteredIds = null;
   if (isSuccess) {
     const { ids, entities } = notes;
     if (isManager || isAdmin) {
@@ -37,7 +37,7 @@ const NotesList = () => {
   }
 
   return (
-    <>
+    <div className={styles['notes-list']}>
       {isLoading ? (
         <p>loading...</p>
       ) : isError ? (
@@ -51,7 +51,7 @@ const NotesList = () => {
       ) : (
         <p>not found</p>
       )}
-    </>
+    </div>
   );
 };
 export default NotesList;
