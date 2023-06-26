@@ -22,11 +22,13 @@ const NewUserForm = () => {
   const [roles, setRoles] = useState(["Employee"]);
 
   useEffect(() => {
-    setValidUsername(USER_REGEX.test(username));
+    // setValidUsername(USER_REGEX.test(username));
+    setValidUsername(true);
   }, [username]);
 
   useEffect(() => {
-    setValidPassword(PWD_REGEX.test(password));
+    // setValidPassword(PWD_REGEX.test(password));
+    setValidPassword(true);
   }, [password]);
 
   useEffect(() => {

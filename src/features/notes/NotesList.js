@@ -1,11 +1,13 @@
 import { useNavigate } from "react-router-dom";
 import { useGetNotesQuery } from "./notes-api";
+import { useAuth } from "hooks/use-auth";
 import Note from "./Note";
 
 import styles from "./styles/notes-list.module.scss";
 
 const NotesList = () => {
   const navigate = useNavigate();
+  const { username, isAdmin, isManager } = useAuth();
   const {
     data: notes,
     isLoading,
@@ -22,15 +24,27 @@ const NotesList = () => {
     navigate("/dash/notes/new");
   };
 
+  let filteredIds = null
+  if (isSuccess) {
+    const { ids, entities } = notes;
+    if (isManager || isAdmin) {
+      filteredIds = [...ids];
+    } else {
+      filteredIds = ids.filter(
+        (noteId) => entities[noteId].username === username
+      );
+    }
+  }
+
   return (
     <>
       {isLoading ? (
         <p>loading...</p>
       ) : isError ? (
         <p>{error?.data?.message}</p>
-      ) : isSuccess && notes?.ids.length ? (
+      ) : isSuccess && filteredIds?.length ? (
         <div>
-          {notes.ids.map((noteId) => (
+          {filteredIds.map((noteId) => (
             <Note key={noteId} noteId={noteId} />
           ))}
         </div>
