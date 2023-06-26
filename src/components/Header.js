@@ -1,14 +1,15 @@
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { selectAuthedUser } from "features/auth/auth-slice";
 import { useLogoutMutation } from "features/auth/auth-api";
+import {useAuth} from 'hooks/use-auth'
+
 import styles from "./styles/header.module.scss";
 
 const Header = () => {
   const navigation = useNavigate();
   const location = useLocation();
-  const authedUser = useSelector(selectAuthedUser);
+  const {isLogged} = useAuth() 
   const [logout, { isError, error, isSuccess }] = useLogoutMutation();
 
   const onLogout = () => {
@@ -29,14 +30,14 @@ const Header = () => {
     </Link>
   );
 
-  if (!authedUser && location.pathname === "/signup")
+  if (!isLogged && location.pathname === "/signup")
     button = (
       <Link to="/signin" className={styles["signup-link"]}>
         Sign in
       </Link>
     );
 
-  if (authedUser) {
+  if (isLogged) {
     button = (
       <button className={styles["signout-button"]} onClick={onLogout}>
         Sign out
