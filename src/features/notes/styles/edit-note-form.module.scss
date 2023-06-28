@@ -20,11 +20,21 @@
         font-size: 14px;
         margin-bottom: 10px;
       }
-      input{
+      input {
         border: none;
         border-bottom: 1px solid #ddd;
         outline: none;
         background: none;
+      }
+    }
+    .form-control-select {
+      margin-top: 15px;
+      display: flex;
+      align-items: center;
+      label {
+        font-weight: 600;
+        font-size: 14px;
+        margin-right: 10px;
       }
     }
     .buttons-group {

@@ -12,15 +12,23 @@ export const useAuth = () => {
   if (accessToken) {
     isLogged = true;
     const decoded = jwtDecode(accessToken);
-    const { username, roles } = decoded.userInfo;
+    const { username, roles, userid } = decoded.userInfo;
 
     isManager = roles.includes("Manager");
     isAdmin = roles.includes("Admin");
     if (isManager) status = "Manager";
     if (isAdmin) status = "Admin";
 
-    return { username, roles, isManager, isAdmin, status, isLogged };
+    return { username, roles, userid, isManager, isAdmin, status, isLogged };
   }
 
-  return { username: "", roles: [], isManager, isAdmin, status, isLogged };
+  return {
+    username: "",
+    roles: [],
+    userid: '',
+    isManager,
+    isAdmin,
+    status,
+    isLogged,
+  };
 };
