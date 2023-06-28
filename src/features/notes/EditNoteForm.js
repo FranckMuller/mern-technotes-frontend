@@ -1,27 +1,29 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUpdateNoteMutation } from "./notes-api";
-import { useAuth } from "hooks/use-auth";
 
 import styles from "./styles/edit-note-form.module.scss";
 
 const EditNoteForm = ({ note }) => {
-  console.log(note);
   const navigate = useNavigate();
-  const { userid } = useAuth();
-  const [updateNote, { isLoading, isSuccess, isError, error }] =
-    useUpdateNoteMutation();
+  const [updateNote, { isSuccess, error }] = useUpdateNoteMutation();
 
   const [title, setTitle] = useState(note.title);
   const [text, setText] = useState(note.text);
-  const [complete, setComplete] = useState(note.complete);
+  const [completed, setCompleted] = useState(note.completed);
 
   const onTitleChange = (e) => setTitle(e.target.value);
   const onTextChange = (e) => setText(e.target.value);
-  const onCompleteChange = () => setComplete((prev) => !prev);
+  const onCompletedChange = () => setCompleted((prev) => !prev);
   const onSubmitForm = (e) => {
     e.preventDefault();
-    updateNote({ id: note.id, title, text, userid, ownerid: note.user });
+    updateNote({
+      id: note.id,
+      title,
+      text,
+      ownerid: note.user,
+      completed,
+    });
   };
 
   useEffect(() => {
@@ -30,18 +32,17 @@ const EditNoteForm = ({ note }) => {
       setText("");
       navigate("/dash/notes");
     }
-  }, [isSuccess]);
+  }, [isSuccess, navigate]);
 
   const canSave = title && text;
 
-  const errClass = error?.data?.message ? "errmsg" : "offscreen";
+  const errClass = error?.data?.message ? "error" : "offscreen";
   const validTitleClass = !title ? "incomplete-input" : "";
   const validTextClass = !text ? "incomplete-input" : "";
 
   return (
     <div className={styles["edit-note-form"]}>
       <h3 className={styles["title"]}>Edit note</h3>
-      <p className={styles[errClass]}>{error?.data?.message}</p>
       <form onSubmit={onSubmitForm}>
         <div className={styles["form-control"]}>
           <label htmlFor="title">Title</label>
@@ -68,17 +69,17 @@ const EditNoteForm = ({ note }) => {
         </div>
 
         <div className={styles["form-control-select"]}>
-          <label htmlFor="complete">Complete</label>
+          <label htmlFor="completed">Completed</label>
           <input
             type="checkbox"
-            name="complete"
-            id="complete"
-            checked={complete}
-            onChange={onCompleteChange}
+            name="completed"
+            id="completed"
+            checked={completed}
+            onChange={onCompletedChange}
           />
         </div>
 
-        <div className={styles["buttons-group"]}>
+        <div className={styles["button-wrapper"]}>
           <button
             className={styles["save-button"]}
             title="Save"
@@ -93,6 +94,8 @@ const EditNoteForm = ({ note }) => {
           >
             delete
           </button>
+
+          <p className={styles[errClass]}>{error?.data?.message}</p>
         </div>
       </form>
     </div>
