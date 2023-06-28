@@ -12,28 +12,28 @@ export const authApi = apiSlice.injectEndpoints({
         },
       }),
 
-      onQueryStarted: async (
-        arg,
-        { dispatch, getState, queryFulfilled, requestId, extra, getCacheEntry }
-      ) => {
-        const data = await queryFulfilled;
-        console.log("METHOD: [onQueryStarted]");
-      },
+      // onQueryStarted: async (
+      //   arg,
+      //   { dispatch, getState, queryFulfilled, requestId, extra, getCacheEntry }
+      // ) => {
+      //   const data = await queryFulfilled;
+      //   console.log("METHOD: [onQueryStarted]");
+      // },
 
-      async onCacheEntryAdded(
-        arg,
-        {
-          dispatch,
-          getState,
-          extra,
-          requestId,
-          cacheEntryRemoved,
-          cacheDataLoaded,
-          getCacheEntry,
-        }
-      ) {
-        console.log("METHOD: [onCacheEntryAdded]");
-      },
+      // async onCacheEntryAdded(
+      //   arg,
+      //   {
+      //     dispatch,
+      //     getState,
+      //     extra,
+      //     requestId,
+      //     cacheEntryRemoved,
+      //     cacheDataLoaded,
+      //     getCacheEntry,
+      //   }
+      // ) {
+      //   console.log("METHOD: [onCacheEntryAdded]");
+      // },
     }),
 
     registration: builder.mutation({

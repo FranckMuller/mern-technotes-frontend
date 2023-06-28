@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useRegistrationMutation } from "./auth-api";
@@ -23,7 +23,7 @@ const RegistrationForm = () => {
   const [isUsernameValid, setIsUsernameValid] = useState(true);
   const [isPasswordValid, setIsPasswordValid] = useState(true);
   const [isRepeatedPasswordValid, setIsRepeatedPasswordValid] = useState(true);
-  const [registration, { isLoading, isSuccess, isError, error }] =
+  const [registration, { error }] =
     useRegistrationMutation();
 
   const { username, password, repeatedPassword } = formData;
@@ -65,7 +65,7 @@ const RegistrationForm = () => {
   };
 
   const canSubmit = username && password && repeatedPassword;
-  const errClass = isError ? "error" : "offscreen";
+  const errClass = error?.data?.message ? "error" : "offscreen";
   const validUsernameClass = !isUsernameValid ? "incomplete-input" : "";
   const validPasswordClass = !isPasswordValid ? "incomplete-input" : "";
   const validMathcesPassword = !isRepeatedPasswordValid

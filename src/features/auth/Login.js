@@ -32,6 +32,7 @@ const Login = () => {
     e.preventDefault();
     try {
       const authData = await login({ username, password }).unwrap();
+      console.log(authData);
       dispatch(setCredentials({ ...authData }));
       setUsername("");
       setPassword("");
@@ -51,14 +52,12 @@ const Login = () => {
   };
 
   const canLogin = username && password;
-  const errClass = errMsg ? "errmsg" : "offscreen";
+  const errClass = errMsg ? "error" : "offscreen";
 
   return (
     <section className={styles["login"]}>
       <h3 className={styles["title"]}>Login to technotes</h3>
-      <p ref={errRef} className={styles[errClass]} aria-live="assertive">
-        {errMsg}
-      </p>
+
       <form onSubmit={onSubmitForm}>
         <div className={styles["form-control"]}>
           <label htmlFor="username">Username:</label>
@@ -101,6 +100,10 @@ const Login = () => {
           <button className={styles["signin-button"]} disabled={!canLogin}>
             sign in
           </button>
+          
+          <p ref={errRef} className={styles[errClass]} aria-live="assertive">
+        {errMsg}
+      </p>
         </div>
 
         <p className={styles["bottom-text"]}>
