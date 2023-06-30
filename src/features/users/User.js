@@ -1,5 +1,10 @@
+import { memo } from "react";
 import { useSelector } from "react-redux";
-import { selectUserById, useDeleteUserMutation } from "./users-api";
+import {
+  selectUserById,
+  useDeleteUserMutation,
+  useGetUsersQuery,
+} from "./users-api";
 import { useNavigate } from "react-router-dom";
 import { BsFillRecordFill } from "react-icons/bs";
 
@@ -7,7 +12,14 @@ import styles from "./styles/user.module.scss";
 
 const User = ({ userId }) => {
   const navigate = useNavigate();
-  const user = useSelector((state) => selectUserById(state, userId));
+  // const user = useSelector((state) => selectUserById(state, userId));
+  const { user } = useGetUsersQuery("usersList", {
+    selectFromResult: ({ data }) => {
+      return {
+        user: data?.entities[userId],
+      };
+    },
+  });
   const [deleteUser] = useDeleteUserMutation();
 
   if (!user) return null;
@@ -51,4 +63,4 @@ const User = ({ userId }) => {
   );
 };
 
-export default User;
+export default memo(User);

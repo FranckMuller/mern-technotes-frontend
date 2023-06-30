@@ -1,13 +1,27 @@
+import { memo } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-import { selectNoteById, useDeleteNoteMutation } from "./notes-api";
+import {
+  selectNoteById,
+  useDeleteNoteMutation,
+  useGetNotesQuery,
+} from "./notes-api";
 
 import styles from "./styles/note.module.scss";
 
 const Note = ({ noteId }) => {
   const navigate = useNavigate();
-  const note = useSelector((state) => selectNoteById(state, noteId));
+  // const note = useSelector((state) => selectNoteById(state, noteId));
+
+  const { note } = useGetNotesQuery("notesList", {
+    selectFromResult: ({ data }) => {
+      return {
+        note: data?.entities[noteId],
+      };
+    },
+  });
+
   const [deleteNote, { isLoading, isSuccess, isError, error }] =
     useDeleteNoteMutation();
 
@@ -32,9 +46,8 @@ const Note = ({ noteId }) => {
 
   return (
     <div className={styles["note"]}>
-    
       {isLoading && <p>deleting is processing...</p>}
-    
+
       <h3 className={styles["title"]}>{note.title}</h3>
       <p className={styles["text"]}>{note.text}</p>
       <div className={styles["date"]}>
@@ -58,4 +71,4 @@ const Note = ({ noteId }) => {
   );
 };
 
-export default Note;
+export default memo(Note);

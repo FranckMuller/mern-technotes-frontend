@@ -12,10 +12,12 @@ export const notesApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => {
     return {
       getNotes: builder.query({
-        query: () => "/notes",
-        validateStatus: (response, result) => {
-          return response.status === 200 && !result.error;
-        },
+        query: () => ({
+          url: "/notes",
+          validateStatus: (response, result) => {
+            return response.status === 200 && !result.error;
+          },
+        }),
         keepUnusedDataFor: 5,
         transformResponse: (responseData) => {
           const loadedNotes = responseData.map((note) => {

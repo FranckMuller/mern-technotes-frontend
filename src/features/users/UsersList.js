@@ -17,7 +17,7 @@ const UsersList = () => {
   });
 
   return (
-    <div className={styles['users-list']}>
+    <div className={styles["users-list"]}>
       {isLoading ? (
         <p>loading</p>
       ) : isError ? (
